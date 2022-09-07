@@ -49,7 +49,6 @@ class FragmentWords : Fragment() {
             else -> Toast.makeText(context,"Else Choosed",Toast.LENGTH_LONG).show()
         }
 
-
     }
 
     fun itsAChoosen(){
