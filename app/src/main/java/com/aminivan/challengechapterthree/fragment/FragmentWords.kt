@@ -31,7 +31,7 @@ class FragmentWords : Fragment() {
         binding = FragmentWordsBinding.bind(view)
 
 
-        var alphabetChoosen = arguments?.getString("alphabet_choosen")
+        var alphabetChoosen: String = "A"
         //binding.tvHelloWords.setText("Data Received : "+alphabetChoosen.toString())
 
         when(alphabetChoosen){

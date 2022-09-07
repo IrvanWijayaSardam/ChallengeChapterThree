@@ -1,5 +1,6 @@
 package com.aminivan.challengechapterthree
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -8,11 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.NonDisposableHandle.parent
+import com.aminivan.challengechapterthree.fragment.FragmentWords
 
 
 class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>) : RecyclerView.Adapter<AlphabetAdapter.ViewHolder>() {
@@ -34,8 +32,11 @@ class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>) : Recy
             override fun onClick(v: View?) {
                 if(holder.btnAlphabet.length() == 1){
                     var bund = Bundle()
+                    var intent: Intent = Intent(context,WordsActivity::class.java)
                     bund.putString("alphabet_choosen",holder.btnAlphabet.text.toString())
-                    Navigation.findNavController(holder.itemView).navigate(R.id.action_fragmentAlphabet_to_fragmentWords,bund)
+                    intent.putExtras(bund)
+                    context.startActivity(intent)
+
                 } else {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=${holder.btnAlphabet.text.toString()}"))
                     context.startActivity(browserIntent)
