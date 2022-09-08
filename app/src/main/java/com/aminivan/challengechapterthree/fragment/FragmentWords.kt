@@ -23,7 +23,13 @@ class FragmentWords : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_words, container, false)
+        //return inflater.inflate(R.layout.fragment_words, container, false)
+        val rootView: View = inflater.inflate(
+            R.layout.fragment_words, container,
+            false
+        )
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +38,8 @@ class FragmentWords : Fragment() {
 
 
         var alphabetChoosen = arguments?.getString("alphabet_choosen")
-        //binding.tvHelloWords.setText("Data Received : "+alphabetChoosen.toString())
+        requireActivity().title = "Words That Start With $alphabetChoosen"
+
 
         when(alphabetChoosen){
             "A" -> itsAChoosen()

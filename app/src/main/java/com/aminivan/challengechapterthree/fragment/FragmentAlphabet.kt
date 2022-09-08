@@ -3,12 +3,11 @@ package com.aminivan.challengechapterthree.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.DataAlphabet
 import com.aminivan.challengechapterthree.R
+import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 
 
 class FragmentAlphabet : Fragment() {
@@ -19,7 +18,14 @@ class FragmentAlphabet : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alphabet, container, false)
+
+        val rootView: View = inflater.inflate(
+            R.layout.fragment_alphabet, container,
+            false
+        )
+        requireActivity().title = "Words"
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,5 +66,7 @@ class FragmentAlphabet : Fragment() {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = adapter
     }
+
+
 
 }
