@@ -1,11 +1,12 @@
 package com.aminivan.challengechapterthree.fragment
 
+import android.R.attr.defaultValue
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aminivan.challengechapterthree.AlphabetAdapter
@@ -14,7 +15,7 @@ import com.aminivan.challengechapterthree.R
 import com.aminivan.challengechapterthree.databinding.FragmentWordsBinding
 
 
-class FragmentWords : Fragment() {
+class FragmentWords(val Choosen: String) : Fragment() {
 
     private lateinit var binding: FragmentWordsBinding
 
@@ -29,9 +30,11 @@ class FragmentWords : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWordsBinding.bind(view)
+        val bundle = this.arguments
 
+        Toast.makeText(context,"${Choosen}",Toast.LENGTH_SHORT).show()
 
-        var alphabetChoosen: String = "A"
+        var alphabetChoosen: String = Choosen
         //binding.tvHelloWords.setText("Data Received : "+alphabetChoosen.toString())
 
         when(alphabetChoosen){
@@ -50,6 +53,8 @@ class FragmentWords : Fragment() {
         }
 
     }
+
+
 
     fun itsAChoosen(){
         val listAlphabet = arrayListOf(
