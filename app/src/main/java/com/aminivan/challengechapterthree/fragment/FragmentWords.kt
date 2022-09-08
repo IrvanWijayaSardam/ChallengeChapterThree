@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aminivan.challengechapterthree.AlphabetAdapter
+import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.DataAlphabet
 import com.aminivan.challengechapterthree.R
 import com.aminivan.challengechapterthree.databinding.FragmentWordsBinding

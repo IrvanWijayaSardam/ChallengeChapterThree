@@ -1,14 +1,12 @@
 package com.aminivan.challengechapterthree.fragment
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aminivan.challengechapterthree.AlphabetAdapter
+import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.DataAlphabet
 import com.aminivan.challengechapterthree.R
 
@@ -27,6 +25,9 @@ class FragmentAlphabet : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showList()
+    }
+    private fun showList() {
         val listAlphabet = arrayListOf(
             DataAlphabet("A"),
             DataAlphabet("B"),
@@ -52,14 +53,12 @@ class FragmentAlphabet : Fragment() {
             DataAlphabet("Y"),
             DataAlphabet("Z"),
         )
-
         val adapter = AlphabetAdapter(listAlphabet)
         val layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycleViewAlphabet)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewAlphabet)
 
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
-
+        recyclerView?.layoutManager = layoutManager
+        recyclerView?.adapter = adapter
     }
 
 }

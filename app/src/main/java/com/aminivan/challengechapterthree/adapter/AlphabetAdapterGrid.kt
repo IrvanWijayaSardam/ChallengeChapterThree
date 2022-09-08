@@ -1,4 +1,4 @@
-package com.aminivan.challengechapterthree
+package com.aminivan.challengechapterthree.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,24 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.NonDisposableHandle.parent
+import com.aminivan.challengechapterthree.DataAlphabet
+import com.aminivan.challengechapterthree.R
 
+class AlphabetAdapterGrid (private val listAlphabet: ArrayList<DataAlphabet>) :
+    RecyclerView.Adapter<AlphabetAdapterGrid.ViewHolder>() {
+    private lateinit var context : Context
 
-class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>) : RecyclerView.Adapter<AlphabetAdapter.ViewHolder>() {
-    private lateinit var context :Context
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val btnAlphabet = itemView.findViewById<Button>(R.id.btnList)
-
+    class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val btnAlphabet = itemView.findViewById<Button>(R.id.btnListGrid)
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_alphabet,parent,false)
-        return ViewHolder(view)
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_alphabet_grid,parent,false)
+        return AlphabetAdapterGrid.ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
