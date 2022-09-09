@@ -1,22 +1,24 @@
 package com.aminivan.challengechapterthree.fragment
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.DataAlphabet
+import com.aminivan.challengechapterthree.MainActivity
 import com.aminivan.challengechapterthree.R
+import com.aminivan.challengechapterthree.databinding.ActivityMainBinding
 import com.aminivan.challengechapterthree.databinding.FragmentWordsBinding
 
 
 class FragmentWords : Fragment() {
 
     private lateinit var binding: FragmentWordsBinding
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,17 +31,17 @@ class FragmentWords : Fragment() {
             false
         )
 
+
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWordsBinding.bind(view)
-
+        setHasOptionsMenu(true)
 
         var alphabetChoosen = arguments?.getString("alphabet_choosen")
         requireActivity().title = "Words That Start With $alphabetChoosen"
-
 
         when(alphabetChoosen){
             "A" -> itsAChoosen()
@@ -55,8 +57,11 @@ class FragmentWords : Fragment() {
             "K" -> itsKChoosen()
             else -> Toast.makeText(context,"Else Choosed",Toast.LENGTH_LONG).show()
         }
+    }
 
-
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.setGroupVisible(R.id.main_menu_group,false)
+        super.onPrepareOptionsMenu(menu)
     }
 
     fun itsAChoosen(){
@@ -246,8 +251,5 @@ class FragmentWords : Fragment() {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = adapter
     }
-
-
-
 
 }

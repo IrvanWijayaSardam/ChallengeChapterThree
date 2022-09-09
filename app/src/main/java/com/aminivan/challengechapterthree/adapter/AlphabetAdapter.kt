@@ -11,11 +11,13 @@ import android.widget.Button
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.aminivan.challengechapterthree.DataAlphabet
+import com.aminivan.challengechapterthree.MainActivity
 import com.aminivan.challengechapterthree.R
 
 
 class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>) : RecyclerView.Adapter<AlphabetAdapter.ViewHolder>() {
     private lateinit var context :Context
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val btnAlphabet = itemView.findViewById<Button>(R.id.btnList)
@@ -47,6 +49,8 @@ class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>) : Recy
     override fun getItemCount(): Int {
         return listAlphabet.size
     }
+
+
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)

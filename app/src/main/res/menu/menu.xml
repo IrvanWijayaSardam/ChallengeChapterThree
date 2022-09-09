@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_list"
-        android:title="Tampilan List"
-        app:showAsAction="never"
-        
-        />
-    <item
-        android:id="@+id/menu_grid"
-        android:title="Tampilan Grid"/>
+    <group
+        android:id="@+id/main_menu_group">
+        <item
+            android:id="@+id/menu_list"
+            android:title="Tampilan List"
+            app:showAsAction="never"
+
+            />
+        <item
+            android:id="@+id/menu_grid"
+            android:title="Tampilan Grid"/>
+    </group>
 </menu>
