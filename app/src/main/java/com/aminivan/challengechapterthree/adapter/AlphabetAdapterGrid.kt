@@ -1,41 +1,31 @@
-package com.aminivan.challengechapterthree
+package com.aminivan.challengechapterthree.adapter
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity.apply
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.GravityCompat.apply
-import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.aminivan.challengechapterthree.DataAlphabet
+import com.aminivan.challengechapterthree.R
 import com.aminivan.challengechapterthree.fragment.FragmentWords
 
+class AlphabetAdapterGrid (private val listAlphabet: ArrayList<DataAlphabet>) :
+    RecyclerView.Adapter<AlphabetAdapterGrid.ViewHolder>() {
+    private lateinit var context : Context
 
-
-class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>
-) : RecyclerView.Adapter<AlphabetAdapter.ViewHolder>() {
-    private lateinit var context :Context
-
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val btnAlphabet = itemView.findViewById<Button>(R.id.btnList)
-
-    }
-
-    interface OnAdapterListener {
-        fun onClick(alphabet : String)
+    class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val btnAlphabet = itemView.findViewById<Button>(R.id.btnListGrid)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_alphabet,parent,false)
-        return ViewHolder(view)
-
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_alphabet_grid,parent,false)
+        return AlphabetAdapterGrid.ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

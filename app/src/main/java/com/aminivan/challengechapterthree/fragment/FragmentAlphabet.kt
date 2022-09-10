@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aminivan.challengechapterthree.AlphabetAdapter
+import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.DataAlphabet
 import com.aminivan.challengechapterthree.R
 
@@ -22,7 +21,13 @@ class FragmentAlphabet : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alphabet, container, false)
+        val rootView: View = inflater.inflate(
+            R.layout.fragment_alphabet, container,
+            false
+        )
+        requireActivity().title = "Words"
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

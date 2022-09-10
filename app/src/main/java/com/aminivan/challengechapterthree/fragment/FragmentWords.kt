@@ -1,41 +1,52 @@
 package com.aminivan.challengechapterthree.fragment
 
-import android.R.attr.defaultValue
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aminivan.challengechapterthree.AlphabetAdapter
+import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.DataAlphabet
 import com.aminivan.challengechapterthree.R
 import com.aminivan.challengechapterthree.databinding.FragmentWordsBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FragmentWords(val Choosen: String) : Fragment() {
-
     private lateinit var binding: FragmentWordsBinding
+    private lateinit var tempArray: ArrayList<DataAlphabet>
+    private lateinit var newArrayList : ArrayList<DataAlphabet>
+    private lateinit var newRecyleView : RecyclerView
+    private lateinit var arrayWords: ArrayList<DataAlphabet>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_words, container, false)
+        val rootView: View = inflater.inflate(
+            R.layout.fragment_words, container,
+            false
+        )
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWordsBinding.bind(view)
-        val bundle = this.arguments
+        setHasOptionsMenu(true)
+
+        newArrayList = arrayListOf()
+        tempArray = arrayListOf()
 
         Toast.makeText(context,"${Choosen}",Toast.LENGTH_SHORT).show()
-
+        requireActivity().title = "Words That Start With $Choosen"
         var alphabetChoosen: String = Choosen
-        //binding.tvHelloWords.setText("Data Received : "+alphabetChoosen.toString())
 
         when(alphabetChoosen){
             "A" -> itsAChoosen()
@@ -51,13 +62,57 @@ class FragmentWords(val Choosen: String) : Fragment() {
             "K" -> itsKChoosen()
             else -> Toast.makeText(context,"Else Choosed",Toast.LENGTH_LONG).show()
         }
+        val adapter = AlphabetAdapter(tempArray)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+        newRecyleView = requireView().findViewById<RecyclerView>(R.id.recycleViewWords)
+        newArrayList.addAll(arrayWords)
+        tempArray.addAll(arrayWords)
+
+        newRecyleView.layoutManager = layoutManager
+        newRecyleView.adapter = adapter
 
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.setGroupVisible(R.id.main_menu_group,false)
+        menu!!.findItem(R.id.search_action).setVisible(true)
+        super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        val item = menu?.findItem(R.id.search_action)
+        val searchView = item?.actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                tempArray.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if(searchText.isNotEmpty()){
+                    newArrayList.forEach{
+                        if (it.alphabet.toLowerCase(Locale.getDefault()).contains(searchText)){
+                            tempArray.add(it)
+                        }
+                    }
+                    newRecyleView.adapter!!.notifyDataSetChanged()
+                }
+                else{
+                    tempArray.clear()
+                    tempArray.addAll(newArrayList)
+                    newRecyleView.adapter!!.notifyDataSetChanged()
+                }
+                return false
+            }
+
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
 
-    fun itsAChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsAChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Adam"),
             DataAlphabet("Animal"),
             DataAlphabet("Anime"),
@@ -72,16 +127,10 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Ayanami Rei"),
             DataAlphabet("Arael"),
         )
-
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsBChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsBChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Bardiel"),
             DataAlphabet("Bumblebee"),
             DataAlphabet("Bunzamon Horaki"),
@@ -93,78 +142,51 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Baba Yaga"),
             DataAlphabet("Barsa"),
             DataAlphabet("Bessie"),
-
         )
-
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsCChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsCChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Castorp"),
             DataAlphabet("Cat King"),
             DataAlphabet("Cat Liner"),
             DataAlphabet("Catbus"),
             DataAlphabet("Chirigo Oginoro"),
-            )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        )
+        return arrayWords
     }
-    fun itsDChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsDChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Death and Rebirth"),
             DataAlphabet("Deceased"),
             DataAlphabet("Depressed"),
             DataAlphabet("Dr.Katsuragi"),
             DataAlphabet("Dragon"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsEChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsEChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Evangelion"),
             DataAlphabet("Emily"),
             DataAlphabet("Enigma"),
             DataAlphabet("Eagle"),
             DataAlphabet("Earthworm"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsFChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsFChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Fio Piccolo"),
             DataAlphabet("Foreman"),
             DataAlphabet("Fox Squirel"),
             DataAlphabet("Fujimoto"),
             DataAlphabet("Fukuo"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsGChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsGChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Ghibli"),
             DataAlphabet("Grandmother Okajima"),
             DataAlphabet("Granmamare"),
@@ -172,15 +194,10 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Galvatron"),
             DataAlphabet("Gendo Ikari"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsHChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsHChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Howl Moving Castle"),
             DataAlphabet("Hajime Aida"),
             DataAlphabet("Hideki Tama"),
@@ -188,15 +205,10 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Haku"),
             DataAlphabet("Heen"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-    fun itsIChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsIChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Inugami Gyobu"),
             DataAlphabet("Israfel"),
             DataAlphabet("Iguana"),
@@ -204,15 +216,11 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Islam"),
             DataAlphabet("I Love You But i'm Letting Go"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
+        return arrayWords
 
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
     }
-    fun itsJChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsJChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Jejak"),
             DataAlphabet("Jellyfish"),
             DataAlphabet("Jinji"),
@@ -220,15 +228,11 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Janji"),
             DataAlphabet("Joji"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
+        return arrayWords
 
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
     }
-    fun itsKChoosen(){
-        val listAlphabet = arrayListOf(
+    fun itsKChoosen():ArrayList<DataAlphabet>{
+        arrayWords = arrayListOf(
             DataAlphabet("Kenangan Manis"),
             DataAlphabet("Kaede Agano"),
             DataAlphabet("Kotone Suzunamo"),
@@ -236,15 +240,6 @@ class FragmentWords(val Choosen: String) : Fragment() {
             DataAlphabet("Kaguya"),
             DataAlphabet("Kashira"),
         )
-        val adapter = AlphabetAdapter(listAlphabet)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycleViewWords)
-
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+        return arrayWords
     }
-
-
-
-
 }
