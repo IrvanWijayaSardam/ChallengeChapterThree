@@ -49,7 +49,6 @@ class AlphabetAdapter (private val listAlphabet: ArrayList<DataAlphabet>) : Recy
             }
         })
         holder.btnAlphabet.setOnLongClickListener {
-            Toast.makeText(context, "OnLongClick Pressed", Toast.LENGTH_SHORT).show()
             val dialog = Dialog(context)
             dialog.setContentView(R.layout.custom_dialog)
 
