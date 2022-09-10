@@ -44,7 +44,6 @@ class FragmentWords(val Choosen: String) : Fragment() {
         newArrayList = arrayListOf()
         tempArray = arrayListOf()
 
-        Toast.makeText(context,"${Choosen}",Toast.LENGTH_SHORT).show()
         requireActivity().title = "Words That Start With $Choosen"
         var alphabetChoosen: String = Choosen
 

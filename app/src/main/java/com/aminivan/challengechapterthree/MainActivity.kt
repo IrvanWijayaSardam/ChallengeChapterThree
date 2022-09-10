@@ -40,10 +40,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_list){
 
-            Toast.makeText(this, "Show List Executed", Toast.LENGTH_SHORT).show()
             showList()
         } else if (item.itemId == R.id.menu_grid) {
-            Toast.makeText(this, "Show Grid Executed", Toast.LENGTH_SHORT).show()
             showGrid()
         }
         return super.onOptionsItemSelected(item)

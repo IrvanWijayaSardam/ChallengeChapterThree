@@ -59,7 +59,6 @@ class FragmentAlphabet : Fragment() {
             DataAlphabet("Z"),
         )
 
-        Toast.makeText(context,"This is fragment Alphabet",Toast.LENGTH_SHORT).show()
         val adapter = AlphabetAdapter(listAlphabet)
         val layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycleViewAlphabet)
