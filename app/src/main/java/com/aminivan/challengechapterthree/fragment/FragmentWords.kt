@@ -86,8 +86,23 @@ class FragmentWords : Fragment() {
         val item = menu?.findItem(R.id.search_action)
         val searchView = item?.actionView as SearchView
         searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                TODO("Not yet implemented")
+            override fun onQueryTextSubmit(newText: String?): Boolean {
+                tempArray.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if(searchText.isNotEmpty()){
+                    newArrayList.forEach{
+                        if (it.alphabet.toLowerCase(Locale.getDefault()).contains(searchText)){
+                            tempArray.add(it)
+                        }
+                    }
+                    newRecyleView.adapter!!.notifyDataSetChanged()
+                }
+                else{
+                    tempArray.clear()
+                    tempArray.addAll(newArrayList)
+                    newRecyleView.adapter!!.notifyDataSetChanged()
+                }
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
