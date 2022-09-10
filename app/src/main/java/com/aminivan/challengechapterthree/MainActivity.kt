@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,11 +20,17 @@ import com.aminivan.challengechapterthree.adapter.AlphabetAdapter
 import com.aminivan.challengechapterthree.adapter.AlphabetAdapterGrid
 import com.aminivan.challengechapterthree.databinding.ActivityMainBinding
 import com.aminivan.challengechapterthree.databinding.FragmentWordsBinding
+import java.util.*
 import java.util.logging.Level.INFO
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
     lateinit var binding: ActivityMainBinding
     lateinit var menuMain: Menu
+    lateinit var newRecyclerView: RecyclerView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,21 +38,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.layoutToolbar)
 
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         this.menuMain = menu
         menuInflater.inflate(R.menu.menu,menu)
+
         return super.onCreateOptionsMenu(menu)
     }
-
-    fun showOverflowMenu(showMenu : Boolean){
-        if (menuMain == null){
-            return
-        }
-        menuMain.setGroupVisible(R.id.main_menu_group,showMenu)
-    }
-
 
     private fun showGrid() {
         val listAlphabet = arrayListOf(
@@ -108,13 +109,10 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = AlphabetAdapter(listAlphabet)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        val recyclerView = findViewById<RecyclerView>(R.id.recycleViewAlphabet)
-        var replacedSelected: String = listAlphabet.get(0).toString().replace("DataAlphabet(alphabet=","",true)
+        newRecyclerView = findViewById<RecyclerView>(R.id.recycleViewAlphabet)
 
-
-
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
+        newRecyclerView.layoutManager = layoutManager
+        newRecyclerView.adapter = adapter
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -128,6 +126,12 @@ class MainActivity : AppCompatActivity() {
             showGrid()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu!!.findItem(R.id.search_action).setVisible(false)
+        super.onPrepareOptionsMenu(menu)
+        return super.onPrepareOptionsMenu(menu)
     }
 
 }
