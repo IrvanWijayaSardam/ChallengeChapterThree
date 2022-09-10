@@ -73,18 +73,7 @@ class MainActivity : AppCompatActivity() {
             DataAlphabet("I"),
             DataAlphabet("J"),
             DataAlphabet("K"),
-            DataAlphabet("O"),
-            DataAlphabet("P"),
-            DataAlphabet("Q"),
-            DataAlphabet("R"),
-            DataAlphabet("S"),
-            DataAlphabet("T"),
-            DataAlphabet("U"),
-            DataAlphabet("V"),
-            DataAlphabet("W"),
-            DataAlphabet("X"),
-            DataAlphabet("Y"),
-            DataAlphabet("Z"),
+
         )
         val adapter = AlphabetAdapterGrid(listAlphabet)
         val gv = GridLayoutManager(this,3)
@@ -105,18 +94,7 @@ class MainActivity : AppCompatActivity() {
             DataAlphabet("I"),
             DataAlphabet("J"),
             DataAlphabet("K"),
-            DataAlphabet("O"),
-            DataAlphabet("P"),
-            DataAlphabet("Q"),
-            DataAlphabet("R"),
-            DataAlphabet("S"),
-            DataAlphabet("T"),
-            DataAlphabet("U"),
-            DataAlphabet("V"),
-            DataAlphabet("W"),
-            DataAlphabet("X"),
-            DataAlphabet("Y"),
-            DataAlphabet("Z"),
+
         )
 
         val adapter = AlphabetAdapter(listAlphabet)
